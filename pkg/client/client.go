@@ -1,7 +1,7 @@
 /**
  * see https://ops.tips/blog/udp-client-and-server-in-go/
  */
-package client;
+package client
 
 import (
 	"context"
@@ -12,7 +12,7 @@ import (
 )
 
 const (
-  maxBufferSize = 2048
+	maxBufferSize = 2048
 )
 
 // client wraps the whole functionality of a UDP client that sends
@@ -49,10 +49,10 @@ func Send(ctx context.Context, address string) (err error) {
 		// - when you've filled up the socket buffer and the OS
 		//   can't dequeue the queue fast enough.
 		//n, err := io.Copy(conn, reader)
-    //n, err := fmt.Fprintf(conn, "WSD")
-    n, err := fmt.Fprintf(conn,
-      "FC1307" + string(0x1) + string(4) + string(0) + string(0) + string(0) + string(0) + string(0) + string(1) + string(5) + string(5) + "adminxxxxxxxxxxxadminxxxxxxxxxxx" + string(0) + string(0) + string(0) + string(1),
-    )
+		//n, err := fmt.Fprintf(conn, "WSD")
+		n, err := fmt.Fprintf(conn,
+			"FC1307"+string(0x1)+string(4)+string(0)+string(0)+string(0)+string(0)+string(0)+string(1)+string(5)+string(5)+"adminxxxxxxxxxxxadminxxxxxxxxxxx"+string(0)+string(0)+string(0)+string(1),
+		)
 		if err != nil {
 			doneChan <- err
 			return

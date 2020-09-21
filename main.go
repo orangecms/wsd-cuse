@@ -4,21 +4,21 @@
 package main
 
 import (
-	"encoding/hex"
 	"context"
+	"encoding/hex"
 	"fmt"
+	"github.com/orangecms/wsd-cuse/pkg/client"
 	"net"
-  "github.com/orangecms/wsd-cuse/pkg/client"
 )
 
 const (
-  // wsdAddress = "localhost"
-  wsdAddress = "192.160.100.1"
-  wsdPort = ":28000"
+	// wsdAddress = "localhost"
+	wsdAddress = "192.160.100.1"
+	wsdPort    = ":28000"
 	clientPort = ":28001"
-	protocol = "udp"
+	protocol   = "udp"
 
-  bufSize int = 2048
+	bufSize int = 2048
 )
 
 func main() {
@@ -33,14 +33,14 @@ func main() {
 		fmt.Println(err)
 	}
 
-  ctx := context.Background()
-  go client.Send(ctx, wsdAddress + wsdPort)
+	ctx := context.Background()
+	go client.Send(ctx, wsdAddress+wsdPort)
 
 	display(udpConn)
 }
 
 func display(conn *net.UDPConn) {
-  buf := make([]byte, bufSize)
+	buf := make([]byte, bufSize)
 	n, err := conn.Read(buf[0:])
 	if err != nil {
 		fmt.Println("Error Reading")
